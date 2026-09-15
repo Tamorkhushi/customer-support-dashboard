@@ -64,37 +64,91 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#fafafa] text-gray-900 p-4 sm:p-6 lg:p-10 font-sans selection:bg-yellow-400 selection:text-black">
-      <div className="max-w-7xl mx-auto">
-        <header className="mb-10">
-          <h1 className="text-4xl font-black tracking-tight text-gray-950">Support Workspace</h1>
-          <p className="text-sm font-semibold text-gray-500 mt-2">Manage and resolve customer inquiries.</p>
-        </header>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <StatCard title="Total Tickets" value={stats.Total} icon={Ticket} colorClass="bg-blue-50" />
-          <StatCard title="Open" value={stats.Open} icon={AlertCircle} colorClass="bg-red-50" />
-          <StatCard title="In Progress" value={stats['In Progress']} icon={Clock} colorClass="bg-yellow-50" />
-          <StatCard title="Resolved" value={stats.Resolved} icon={CheckCircle2} colorClass="bg-green-50" />
-        </div>
+<div className="min-h-screen w-full bg-[#fafafa] text-gray-900 font-sans selection:bg-yellow-400 selection:text-black overflow-x-hidden">
+  <div className="w-full max-w-[1600px] mx-auto px-3 py-4 sm:px-5 sm:py-6 md:px-6 md:py-8 lg:px-8 lg:py-10 xl:px-10 2xl:px-12">
 
-        <Filters 
-          search={search} setSearch={setSearch} 
-          status={status} setStatus={setStatus} 
-          priority={priority} setPriority={setPriority} 
-        />
+    {/* Header */}
+    <header className="mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+      <div className="max-w-4xl">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-black tracking-tight leading-tight text-gray-950 break-words">
+          Support Workspace
+        </h1>
 
-        <TicketList 
-          tickets={filteredTickets} 
-          onUpdateStatus={updateStatus} 
-          onViewDetails={setSelectedTicket} 
-        />
+        <p className="text-xs sm:text-sm md:text-base lg:text-base font-semibold text-gray-500 mt-1.5 sm:mt-2 md:mt-3 leading-relaxed">
+          Manage and resolve customer inquiries.
+        </p>
+      </div>
+    </header>
 
-        <TicketDetails 
-          ticket={selectedTicket} 
-          onClose={() => setSelectedTicket(null)} 
+    {/* Statistics */}
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-6 sm:mb-8 md:mb-10">
+
+      <div className="min-w-0">
+        <StatCard
+          title="Total Tickets"
+          value={stats.Total}
+          icon={Ticket}
+          colorClass="bg-blue-50"
         />
       </div>
+
+      <div className="min-w-0">
+        <StatCard
+          title="Open"
+          value={stats.Open}
+          icon={AlertCircle}
+          colorClass="bg-red-50"
+        />
+      </div>
+
+      <div className="min-w-0">
+        <StatCard
+          title="In Progress"
+          value={stats["In Progress"]}
+          icon={Clock}
+          colorClass="bg-yellow-50"
+        />
+      </div>
+
+      <div className="min-w-0">
+        <StatCard
+          title="Resolved"
+          value={stats.Resolved}
+          icon={CheckCircle2}
+          colorClass="bg-green-50"
+        />
+      </div>
+
     </div>
+
+    {/* Filters */}
+    <div className="w-full min-w-0 mb-6 sm:mb-8 md:mb-10">
+      <Filters
+        search={search}
+        setSearch={setSearch}
+        status={status}
+        setStatus={setStatus}
+        priority={priority}
+        setPriority={setPriority}
+      />
+    </div>
+
+    {/* Ticket List */}
+    <section className="w-full min-w-0">
+      <TicketList
+        tickets={filteredTickets}
+        onUpdateStatus={updateStatus}
+        onViewDetails={setSelectedTicket}
+      />
+    </section>
+
+    {/* Ticket Details */}
+    <TicketDetails
+      ticket={selectedTicket}
+      onClose={() => setSelectedTicket(null)}
+    />
+
+  </div>
+</div>
   );
 }
